@@ -4,37 +4,59 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Status: Active](https://img.shields.io/badge/Status-Active-green.svg)](https://github.com)
 [![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com)
-[![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Architecture: Production-Ready](https://img.shields.io/badge/Architecture-Production--Ready-blue.svg)](./README.md)
+[![CI](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)](./.github/workflows/ci.yml)
+[![Tests: 28](https://img.shields.io/badge/Tests-28%20passing-2ea44f)](./tests/)
+[![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](./pyproject.toml)
+[![Type Check: mypy](https://img.shields.io/badge/type%20check-mypy-blue.svg)](./pyproject.toml)
+[![Architecture: Modular](https://img.shields.io/badge/Architecture-Modular-blue.svg)](./README.md)
 [![React 18+](https://img.shields.io/badge/React-18%2B-61DAFB?logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5%2B-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-5%2B-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![AI Agents: 7](https://img.shields.io/badge/AI%20Agents-7-purple.svg)](#ai-agents)
 [![UML: Mermaid](https://img.shields.io/badge/UML-Mermaid-green.svg)](https://mermaid.js.org/)
 [![UML: PlantUML](https://img.shields.io/badge/UML-PlantUML-blue.svg)](https://plantuml.com/)
-[![Diagrams: 13+](https://img.shields.io/badge/Diagrams-13%2B-orange.svg)](#plantuml-diagrams)
+[![Diagrams: 13](https://img.shields.io/badge/Diagrams-13-orange.svg)](#plantuml-diagrams)
 [![Made with ❤️](https://img.shields.io/badge/Made%20with-❤️-red.svg)](#author)
 
-> A comprehensive project structure generator for modern Web applications with AI agent integration, production-ready and battle-tested architecture.
+> A comprehensive project structure generator for modern Web applications with AI agent integration, modular architecture, automated testing, and CI/CD.
 
 **Author:** Jafte Carneiro Fagundes da Silva
 **Version:** 1.0.0
 **License:** MIT
 **Last Updated:** 2026-05-13
 
+---
+
+## What's New in 1.0.0
+
+| Improvement | Description |
+|-------------|-------------|
+| **Modular Architecture** | `create_project.py` split into `templates.py` (templates) + `create_project.py` (orchestrator) |
+| **28 Automated Tests** | Full test coverage for all templates and PlantUML diagrams |
+| **CI/CD Pipeline** | GitHub Actions workflow testing Python 3.8 through 3.12 |
+| **Type Hints** | All functions annotated (mypy-compatible) |
+| **Auto-Registration** | PlantUML diagrams register via `@register_diagram` decorator — add a diagram, it's automatically included |
+| **Clean `.gitignore`** | Removed all duplicate entries, consolidated sections |
+| **IO Abstraction** | `_write_file()` / `_write_dir()` / `_write_files()` eliminate repetitive code |
+| **`pyproject.toml`** | Project metadata, pytest/ruff/mypy configuration |
+| **`KNOWLEDGE_GRAPH.md`** | Replaced one-line placeholder with complete dependency table |
+| **Bug Fix** | `tpl_project_context()` had a duplicate definition (PT-BR overwriting EN-US) — resolved |
+| **Documentation Accuracy** | STRUCTURE.md line counts corrected from "3000+" to actual 881 |
+
+---
+
 ## Overview
 
-`create_project.py` is an automated tool that generates production-ready Web application project structures with:
+The Web Project Generator is an automated tool that generates production-ready Web application project structures with:
 
+- **Modular Python Codebase**: Template functions separated from orchestration logic (`templates.py` + `create_project.py`)
 - **Documentation System**: Organized knowledge base with 4-tier authority hierarchy
 - **AI Agents**: 7 specialized agents for different roles
-  - Web Developer, Frontend Architect, React Specialist
-  - Code Review, Security Review, UML Modeling, Testing
 - **Modern Tech Stack**: React + TypeScript + Vite + Vitest
-- **Dual UML Support**:
-  - **Mermaid**: 5+ lightweight diagrams (Flowcharts, Classes, Sequences, etc.)
-  - **PlantUML**: 13 professional diagrams (Use Case, Component, State, Deployment, ERD, etc.)
+- **Dual UML Support**: Mermaid + 13 PlantUML professional diagrams
 - **Best Practices**: SOLID principles, accessibility, security, testing strategies
+- **Automated Testing**: 28 tests covering all templates and diagrams
+- **CI/CD Ready**: GitHub Actions pipeline for continuous integration
 
 ## Quick Start
 
@@ -48,6 +70,10 @@
 ```bash
 # Clone or download the repository
 cd dev_tools
+
+# (Optional) Run tests to verify everything works
+pip install pytest
+python -m pytest tests/ -v
 
 # Run the generator
 python create_project.py
@@ -73,15 +99,84 @@ Output directory [my_awesome_app]: ./my-awesome-app
 [NEXT] Next Steps:
   1. Review START_HERE.md and fill in project-specific information
   2. Update /docs/knowledge/core/00_project_context.md with project goals
-  3. Install PlantUML: brew install plantuml graphviz
-  4. Update /docs/design.md with your architecture and UML diagrams
-  5. Customize PlantUML diagrams in /docs/uml/plantuml/
-  6. Fill in /docs/knowledge/source-of-truth/ADR/ with your decisions
-  7. Adjust agents in prompts/templates/ai-agents/ if needed
-  8. Create src/ and public/ directories for your application
-  9. Run: npm install
-  10. Commit to Git
+  3. Update /docs/design.md with your architecture and UML diagrams
+  4. Fill in /docs/knowledge/source-of-truth/ADR/ with your decisions
+  5. PlantUML diagrams are in /docs/uml/plantuml/ - customize as needed
+  6. Adjust agents in prompts/templates/ai-agents/ if needed
+  7. Create src/ and public/ directories for your application
+  8. Run: npm install
+  9. Commit to Git
 ```
+
+## Testing
+
+The project includes **28 automated tests** covering all templates and diagrams:
+
+```bash
+pip install pytest
+python -m pytest tests/ -v
+```
+
+### Test Structure
+
+```
+tests/
+├── __init__.py
+├── test_templates.py      # 21 tests — verifies all tpl_*() functions
+└── test_plantuml.py       # 7 tests — verifies all PlantUML diagrams
+```
+
+**What's tested:**
+- ✅ All 21 template functions return valid markdown with expected content
+- ✅ All 13 PlantUML diagrams have valid `@startuml`/`@enduml` syntax
+- ✅ Every diagram has required keys (name, description, type, content)
+- ✅ Diagram types are valid (use-case, class, sequence, component, state, deployment, erd)
+- ✅ All 13 specific diagram files are present and registered
+
+## CI/CD
+
+Every push and pull request runs the test suite across **Python 3.8 through 3.12**:
+
+```yaml
+# .github/workflows/ci.yml
+- Runs pytest on all 28 tests
+- Verifies Python syntax on all modules
+- Matrix strategy: 5 Python versions
+```
+
+## Codebase Architecture
+
+### Before v1.0.0 (Monolithic)
+
+```
+create_project.py   # 2695 lines — templates + logic + CLI mixed
+plantuml_diagrams.py # 947 lines — manual diagram registration
+```
+
+### After v1.0.0 (Modular)
+
+```
+create_project.py   # ~250 lines — orchestration, CLI, AGENTS/DIRS config
+templates.py        # ~2400 lines — all tpl_*() template functions
+plantuml_diagrams.py # ~950 lines — auto-registration via decorator
+pyproject.toml      # Project metadata, tool configs
+tests/              # 28 automated tests
+.github/workflows/  # CI/CD pipeline
+```
+
+### PlantUML Auto-Registration
+
+Adding a new diagram is now **one decorator away**:
+
+```python
+@register_diagram("my_new_type", "my_diagram.puml", "Description", "class")
+def puml_my_diagram():
+    return "@startuml ... @enduml"
+```
+
+No manual mapping in `get_all_plantuml_diagrams()` needed — it's automatic.
+
+---
 
 ## Generated Project Structure
 
@@ -103,7 +198,7 @@ my-awesome-app/
 │   │
 │   ├── knowledge/
 │   │   ├── KNOWLEDGE_BASE.md                  # Documentation index (tier guide)
-│   │   ├── KNOWLEDGE_GRAPH.md                 # Relationship-focused docs
+│   │   ├── KNOWLEDGE_GRAPH.md                 # Relationship map and dependencies
 │   │   │
 │   │   ├── source-of-truth/                   # Tier 1: Authoritative
 │   │   │   ├── ARCHITECTURE.md                # System architecture (read-only)
@@ -122,38 +217,28 @@ my-awesome-app/
 │   │   │   └── 08_deployment_model.md         # Deployment architecture
 │   │   │
 │   │   ├── implementation/                    # Tier 3: Working documents
-│   │   │   └── [implementation notes]
-│   │   │
 │   │   ├── meetings/                          # Meeting notes (date-prefixed)
-│   │   │   └── 2026-05-13_kickoff.md
-│   │   │
 │   │   ├── team/                              # Team information
-│   │   │   └── [team docs]
-│   │   │
-│   │   └── archive/                           # Tier 4: Historical (obsolete docs)
-│   │       └── [old documentation]
+│   │   └── archive/                           # Tier 4: Historical
 │   │
 │   ├── adr/                                   # Architecture Decision Records
-│   │   └── [ADR files]
-│   │
-│   ├── uml/                                   # UML diagrams (Mermaid + PlantUML)
+│   ├── uml/                                   # UML diagrams
 │   │   ├── mermaid/                           # Lightweight diagrams
 │   │   └── plantuml/                          # 13 Professional diagrams
 │   │
 │   └── generated/                             # Generated artifacts
-│       ├── PROGRESS_TRACKER.md                # Sprint progress and metrics
-│       └── [generated reports]
+│       └── PROGRESS_TRACKER.md                # Sprint progress and metrics
 │
 ├── prompts/
 │   └── templates/
 │       └── ai-agents/                         # AI agent prompts (source of truth)
-│           ├── web_developer_agent.md         # Implements features
-│           ├── frontend_architecture_agent.md # Design and routes
-│           ├── react_specialist_agent.md      # React-specific challenges
-│           ├── code_review_agent.md           # Code quality review
-│           ├── security_review_agent.md       # Security analysis
-│           ├── uml_modeling_agent.md          # UML diagram creation
-│           └── testing_agent.md               # Testing strategies
+│           ├── web_developer_agent.md
+│           ├── frontend_architecture_agent.md
+│           ├── react_specialist_agent.md
+│           ├── code_review_agent.md
+│           ├── security_review_agent.md
+│           ├── uml_modeling_agent.md
+│           └── testing_agent.md
 │
 ├── .claude/
 │   ├── commands/                              # Slash command wrappers
@@ -167,10 +252,7 @@ my-awesome-app/
 │   └── skills/
 │
 ├── src/                                       # Your application source code
-│   └── [to be created by you]
-│
 └── public/                                    # Static assets
-    └── [to be created by you]
 ```
 
 ## Key Concepts
@@ -182,30 +264,21 @@ The project uses a **4-tier authority system** to organize documentation:
 #### Tier 1: Source of Truth
 - **Location**: `/docs/knowledge/source-of-truth/`
 - **Authority**: Absolute and binding
-- **Examples**: ARCHITECTURE.md, ADRs, approved requirements
-- **AI Rule**: Read-only; cite for authoritative claims
 - **Updates**: Require explicit user approval
 
 #### Tier 2: Core Knowledge
 - **Location**: `/docs/knowledge/core/` (numbered files)
 - **Authority**: High; foundational context
-- **Examples**: Domain model, frontend architecture, component patterns
-- **AI Rule**: Use as technical foundation
 - **Updates**: Keep aligned with current architecture
 
 #### Tier 3: Implementation & Working Documents
 - **Location**: `/docs/`, `/docs/knowledge/implementation/`, `/docs/knowledge/meetings/`
 - **Authority**: Helpful but evolving
-- **Examples**: Sprint plans, task lists, meeting notes, design drafts
-- **AI Rule**: Validate against Tier 1 and 2
-- **Updates**: Change frequently; document important decisions
+- **Updates**: Change frequently
 
 #### Tier 4: Archive
 - **Location**: `/docs/knowledge/archive/`
 - **Authority**: Historical reference only
-- **Examples**: Obsolete documentation, deprecated approaches
-- **AI Rule**: Never use as current truth
-- **Status**: Clearly marked as archived
 
 ### 2. **AI Agents**
 
@@ -221,23 +294,16 @@ The project includes 7 specialized AI agents, activated via slash commands:
 | UML Modeling Agent             | `/uml`       | Create and maintain system diagrams              |
 | Testing Agent                  | `/test`      | Design tests, coverage strategies                |
 
-**All agents follow mandatory initialization:**
-
-```
-1. Read START_HERE.md
-2. Read /AGENTS.md
-3. Read /docs/knowledge/KNOWLEDGE_BASE.md
-4. Read /docs/design.md
-5. Read /docs/plan.md and /docs/tasks.md
-6. Read relevant Tier 1 and Tier 2 documents
-```
-
 ### 3. **Project Files**
 
 | File | Purpose |
 |------|---------|
-| **create_project.py** | Main generator - creates new Web projects |
-| **plantuml_diagrams.py** | PlantUML templates (13 diagrams) |
+| **create_project.py** | Main generator — orchestrator (~250 lines) |
+| **templates.py** | All markdown template functions (~2400 lines) |
+| **plantuml_diagrams.py** | PlantUML templates with auto-registration (13 diagrams) |
+| **pyproject.toml** | Project metadata, pytest/ruff/mypy configuration |
+| **tests/** | 28 automated tests (templates + diagrams) |
+| **.github/workflows/ci.yml** | CI/CD pipeline (Python 3.8–3.12) |
 | **README.md** | This comprehensive guide |
 | **PLANTUML_GUIDE.md** | PlantUML installation & usage |
 | **AUTHOR.md** | Author info & contributions |
@@ -250,24 +316,20 @@ The project includes 7 specialized AI agents, activated via slash commands:
 #### `/docs/plan.md`
 - **Purpose**: Current implementation plan
 - **Sections**: Objective, Scope, Architecture Impact, Testing Strategy, Acceptance Criteria
-- **Use**: Before implementation; guides the team
 
 #### `/docs/tasks.md`
 - **Purpose**: Actionable work items
 - **Sections**: Backlog, In Progress, Blocked, Completed, Verification Checklist
-- **Use**: Track progress; prevent scope creep
 
 #### `/docs/design.md`
 - **Purpose**: System architecture and design decisions
-- **Sections**: System Overview, Domain Model, Frontend Architecture, Component Architecture, UML Diagrams, Design Decisions
-- **Use**: Reference during implementation; update when architecture changes
+- **Sections**: System Overview, Domain Model, Frontend Architecture, UML Diagrams, Design Decisions
 
 #### `/docs/memory.md`
 - **Purpose**: Durable decisions and user preferences
 - **Sections**: User Preferences, Approved Decisions, Rejected Decisions, Repository Conventions
-- **Use**: Cross-session continuity; team memory
 
-### 4. **UML-First Design**
+### 5. **UML-First Design**
 
 UML is **mandatory** for non-trivial changes:
 
@@ -279,32 +341,8 @@ UML is **mandatory** for non-trivial changes:
 - **Deployment Diagrams**: Browser, CDN, servers, databases
 
 Choose your preferred format:
-- **Mermaid** - Lightweight, built into Markdown
-- **PlantUML** - Professional, more diagram types
-
-Both are version-control friendly and auto-generated in CI/CD pipelines.
-
-**Example: Component Diagram**
-
-```mermaid
-graph TB
-    App[React App]
-    Router[Router]
-    Layout[App Layout]
-    Page[Feature Page]
-    Hook[Custom Hook]
-    Service[Application Service]
-    ApiClient[API Client]
-    Api[Backend API]
-
-    App --> Router
-    Router --> Layout
-    Layout --> Page
-    Page --> Hook
-    Hook --> Service
-    Service --> ApiClient
-    ApiClient --> Api
-```
+- **Mermaid** — Lightweight, built into Markdown
+- **PlantUML** — Professional, 13 diagram types, auto-registered
 
 ## Usage Workflow
 
@@ -344,7 +382,7 @@ Edit `/docs/design.md`:
 - Frontend architecture (pages, features, shared)
 - Component and route architecture
 - API contracts and data flow
-- UML diagrams (Use Case, Component, Sequence, State Machine)
+- UML diagrams
 
 ### 6. **Create ADRs**
 
@@ -393,169 +431,7 @@ After meetings or significant decisions:
 4. Update `/docs/tasks.md` with work items
 5. Update `/docs/knowledge/KNOWLEDGE_BASE.md` if structure changed
 
-## File Reference
-
-### START_HERE.md
-
-**Read this first.** Contains:
-- Project summary and team
-- Tech stack
-- How to run, test, build, preview
-- Key architecture decisions
-- Documentation map
-- Credentials policy
-- First files to read (suggested order)
-
-### AGENTS.md
-
-Rules for all AI agents operating on this project:
-
-- Mission and core principles
-- Mandatory session initialization
-- Document authority hierarchy
-- Evidence and confidence rules
-- UML requirements
-- Language rules (English docs, code comments optional Portuguese)
-- Clarifying questions strategy
-- Non-negotiable rules
-
-### /docs/knowledge/KNOWLEDGE_BASE.md
-
-Complete documentation index:
-
-- Authority hierarchy explained
-- Concept clusters (Architecture, Domain, Components, Testing, etc.)
-- Navigation paths (for new members, architecture review, implementation, post-meeting)
-- Relationship map (Mermaid)
-- Maintenance rules and triggers
-
-### /docs/knowledge/core/* (8 files)
-
-Numbered core knowledge files (read in order):
-
-1. `00_project_context.md` — Goals, success criteria, stakeholders, constraints, risks
-2. `01_domain_model.md` — Domain entities, value objects, business rules
-3. `02_frontend_architecture.md` — Layering, folder structure, key decisions
-4. `03_component_model.md` — Component classification, naming, patterns
-5. `04_api_integration.md` — API overview, client structure, data mapping, error handling
-6. `05_testing_strategy.md` — Testing philosophy, test types, organization, CI/CD
-7. `06_accessibility_strategy.md` — WCAG standard, implementation guidelines, testing
-8. `07_security_model.md` — Threat model, rules, CSP, dependency management
-9. (Bonus) `08_deployment_model.md` — Deployment architecture, environments, build process
-
-## Best Practices
-
-### Documentation
-
-- **Keep current**: Stale docs are worse than no docs
-- **Use tiers wisely**: Tier 1 = approved, Tier 3 = drafts, Tier 4 = archive
-- **Link across docs**: Use file paths and Mermaid diagrams
-- **Date meeting notes**: Use `YYYY-MM-DD_topic.md` format
-- **Archive obsolete docs**: Move to `/docs/knowledge/archive/` with banner
-
-### Design
-
-- **UML for non-trivial changes**: Use Mermaid in `/docs/design.md`
-- **Sequence diagrams for complex flows**: Show interactions between components, services, APIs
-- **State machines for UI**: Model form, auth, checkout states
-- **Class diagrams for domain**: Show entities, value objects, services
-
-### Code
-
-- **Respect tiers**: Never contradict Tier 1 documents
-- **Quote sources**: Use `file.md:L10-L15` format
-- **Mark confidence**: HIGH (Tier 1 or code), MEDIUM (Tier 2), LOW (inferred)
-- **Ask clarifying questions**: Better than assuming
-
-### Agents
-
-- **Initialize sessions**: All agents read setup docs first
-- **Cite evidence**: Repository context over speculation
-- **Update memory**: Record durable decisions in `/docs/memory.md`
-- **Maintain UML**: Keep diagrams synchronized with code
-
-## Troubleshooting
-
-### "Project name is required"
-
-Provide a name when prompted. Can't be empty.
-
-### Directory already exists
-
-If the target directory is not empty, you'll be asked to confirm. Choose yes to continue.
-
-### UnicodeEncodeError
-
-Ensure your terminal supports UTF-8. The script uses ASCII-safe output by default.
-
-### Missing dependencies
-
-After project generation, run:
-
-```bash
-cd your-project
-npm install
-```
-
-## Advanced Usage
-
-### Customizing Agents
-
-Edit agent prompts in `/prompts/templates/ai-agents/`:
-
-```bash
-# Before: Custom agent workflow
-/dev - "Implement feature X"
-
-# After: Edit the agent, then
-/dev - "Implement feature X"
-```
-
-Agent changes take effect immediately in Claude Code.
-
-### Adding Custom Knowledge
-
-Create new files in `/docs/knowledge/core/` or `/docs/knowledge/implementation/`:
-
-```markdown
-# 09_custom_topic.md
-
-> Custom documentation
-> Authority: Tier 2 or Tier 3
-> Status: Active
-> Last Updated: 2026-05-13
-
-[Your content]
-```
-
-Then update `/docs/knowledge/KNOWLEDGE_BASE.md` to reference it.
-
-### Creating ADRs
-
-Copy `/docs/knowledge/source-of-truth/ADR/ADR-001-example.md` and fill in:
-
-```markdown
-# ADR-002: [Your Decision]
-
-> Status: Proposed / Accepted / Deprecated
-> Date: [Today]
-
-## Context
-[Why was this decision needed?]
-
-## Decision
-[What was decided?]
-
-## Rationale
-[Why?]
-
-## Consequences
-[Positive and negative impacts]
-```
-
 ## Architecture Principles
-
-This generator enforces these principles:
 
 1. **Repository Grounding**: All decisions based on repository evidence
 2. **Tier Authority**: Tier 1 always wins; lower tiers must align
@@ -568,283 +444,56 @@ This generator enforces these principles:
 9. **Modularity**: Cohesive modules with clean boundaries
 10. **Documentation**: Decisions recorded, architecture explained
 
-## Examples
+## PlantUML Diagrams
 
-### Example 1: Create a Login Feature
+### 13 Professional Diagrams
 
-```bash
-/dev - "Design the login feature"
-# Agent creates UML sequence diagram in /docs/design.md
-# Agent creates component plan
-# Agent identifies accessibility and security requirements
+| # | File | Type | Description |
+|---|------|------|-------------|
+| 1 | `web_usecase_diagram.puml` | Use Case | Web app capabilities |
+| 2 | `auth_usecase_diagram.puml` | Use Case | Auth flows |
+| 3 | `domain_model.puml` | Class | Domain entities |
+| 4 | `services_diagram.puml` | Class | Services & interfaces |
+| 5 | `login_sequence.puml` | Sequence | Login flow steps |
+| 6 | `checkout_sequence.puml` | Sequence | Checkout process |
+| 7 | `frontend_components.puml` | Component | React components |
+| 8 | `system_architecture.puml` | Component | System layers |
+| 9 | `form_states.puml` | State Machine | Form validation |
+| 10 | `order_states.puml` | State Machine | Order lifecycle |
+| 11 | `auth_states.puml` | State Machine | Auth session |
+| 12 | `deployment_architecture.puml` | Deployment | Infrastructure |
+| 13 | `database_erd.puml` | ERD | Database schema |
 
-/arch - "Review the login architecture"
-# Agent validates against ARCHITECTURE.md
-# Agent suggests improvements
+### Auto-Registration
 
-/test - "Write login tests"
-# Agent creates unit, component, and E2E test plans
+Diagrams use the `@register_diagram` decorator — adding a new diagram is as simple as:
 
-/dev - "Implement the login form"
-# Agent writes LoginPage.tsx, LoginForm.tsx, useLoginForm.ts
-# Agent writes tests
-# Agent creates ADR for auth flow decisions
+```python
+@register_diagram("my_key", "my_file.puml", "Description", "type")
+def puml_my_diagram():
+    return "@startuml ... @enduml"
 ```
 
-### Example 2: Refactor State Management
+Run `python plantuml_diagrams.py` to list all registered diagrams.
 
-```bash
-/arch - "How should we manage global state?"
-# Agent reviews current state, proposes options
-# Creates comparison table in /docs/design.md
-
-/dev - "Implement Context API for auth state"
-# Agent refactors to use Context
-# Updates component tree diagrams
-# Writes tests
-
-/review - "Review the state management refactor"
-# Agent checks for coupling, context boundaries, performance
-# Suggests optimizations
-
-/uml - "Update the Component Diagram"
-# Agent creates updated diagram showing providers
-```
-
-## Support
-
-For issues or questions:
-
-1. Check `/docs/knowledge/KNOWLEDGE_BASE.md` for navigation
-2. Review relevant `/docs/knowledge/core/*.md` files
-3. Look at examples in `/docs/design.md`
-4. Ask Claude Code agents using `/dev`, `/arch`, `/review`, etc.
-
-## UML Diagrams: Mermaid & PlantUML
-
-This project includes **dual UML support** with Mermaid for lightweight diagrams and **13 professional PlantUML templates**.
-
-### Mermaid vs PlantUML Comparison
-
-| Feature | Mermaid | PlantUML |
-|---------|---------|----------|
-| **Setup** | No install needed | Requires installation |
-| **Best For** | Quick, lightweight | Professional, complex |
-| **Diagram Types** | 8+ basic types | 13+ comprehensive types |
-| **Version Control** | Excellent | Excellent |
-| **Learning Curve** | Very easy | Easy-Medium |
-| **Export Options** | SVG, PNG | SVG, PNG, PDF, ASCII |
-| **IDE Integration** | Many plugins | VS Code, IntelliJ |
-| **Mermaid Markdown** | Native support | With plugin |
-
-**Recommendation**: Use **Mermaid** for documentation; use **PlantUML** for architecture documents.
-
-### PlantUML: 13 Professional Diagrams
-
-#### Available Diagrams
-
-```
-docs/uml/plantuml/
-├── [Use Cases] (2)
-│   ├── web_usecase_diagram.puml           # Web app capabilities
-│   └── auth_usecase_diagram.puml          # Auth flows
-│
-├── [Classes] (2)
-│   ├── domain_model.puml                  # Domain entities
-│   └── services_diagram.puml              # Services & interfaces
-│
-├── [Sequences] (2)
-│   ├── login_sequence.puml                # Login flow steps
-│   └── checkout_sequence.puml             # Checkout process
-│
-├── [Components] (2)
-│   ├── frontend_components.puml           # React components
-│   └── system_architecture.puml           # System layers
-│
-├── [State Machines] (3)
-│   ├── form_states.puml                   # Form validation states
-│   ├── order_states.puml                  # Order lifecycle
-│   └── auth_states.puml                   # Auth session states
-│
-├── [Deployment] (1)
-│   └── deployment_architecture.puml       # Infrastructure
-│
-└── [Database] (1)
-    └── database_erd.puml                  # Entity relationships
-```
-
-### Quick Start: PlantUML
-
-#### 1. Install PlantUML
-
-```bash
-# macOS (Homebrew)
-brew install plantuml graphviz
-
-# Ubuntu/Debian (APT)
-sudo apt-get install plantuml graphviz
-
-# Windows (Chocolatey)
-choco install plantuml graphviz
-
-# Or use online editor: https://www.plantuml.com/plantuml/uml/
-```
-
-#### 2. Generate Diagrams
-
-```bash
-# Convert .puml to SVG
-plantuml -tsvg docs/uml/plantuml/domain_model.puml
-
-# Convert all diagrams
-plantuml -tsvg docs/uml/plantuml/*.puml
-
-# Generate PNG
-plantuml -tpng docs/uml/plantuml/*.puml
-```
-
-#### 3. View in VS Code
-
-1. Install extension: **PlantUML** (`jebbs.plantuml`)
-2. Open any `.puml` file
-3. Right-click → **Open Preview**
-4. Edit and see real-time updates
-
-#### 4. Customize for Your Project
-
-Edit any diagram and update:
-- Actors and use cases
-- Class names and attributes
-- Sequence participants
-- State names and transitions
-- Component names and connections
-
-```plantuml
-@startuml my_diagram
-!theme plain
-title My Custom Diagram
-
-[Edit this content for your project]
-
-@enduml
-```
-
-### PlantUML Documentation
-
-See **[PLANTUML_GUIDE.md](./PLANTUML_GUIDE.md)** for comprehensive guide:
-
-- ✅ Installation for all platforms
-- ✅ How to customize each diagram
-- ✅ Export to multiple formats (SVG, PNG, PDF)
-- ✅ CI/CD integration with GitHub Actions
-- ✅ Best practices and design patterns
-- ✅ Troubleshooting and FAQs
-- ✅ Creating new diagrams from scratch
-
-### File Structure
-
-```
-docs/uml/
-├── mermaid/                    # Mermaid diagrams (lightweight)
-│   └── [existing Mermaid files]
-│
-└── plantuml/                   # PlantUML diagrams (13 professional)
-    ├── usecase_web_app_diagram.puml
-    ├── auth_usecase_diagram.puml
-    ├── domain_model.puml
-    ├── services_diagram.puml
-    ├── login_sequence.puml
-    ├── checkout_sequence.puml
-    ├── frontend_components.puml
-    ├── system_architecture.puml
-    ├── form_states.puml
-    ├── order_states.puml
-    ├── auth_states.puml
-    ├── deployment_architecture.puml
-    └── database_erd.puml
-```
-
-### Integration with CI/CD
-
-Automatic export with GitHub Actions:
-
-```yaml
-name: Export PlantUML Diagrams
-on: [push]
-
-jobs:
-  export:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: sudo apt-get install plantuml
-      - run: plantuml -tsvg docs/uml/plantuml/*.puml
-      - run: git add docs/uml/plantuml/*.svg
-      - run: git commit -m "chore: export diagrams" || true
-```
-
-### Module Access
-
-The diagrams are generated from `plantuml_diagrams.py`:
-
-```bash
-# List all available diagrams
-python plantuml_diagrams.py
-```
-
-Output:
-```
-PlantUML Diagrams Available: 13
-
-[OK] web_usecase_diagram.puml                 - Use Case Diagram for Web Application
-[OK] auth_usecase_diagram.puml                - Use Case Diagram for Authentication
-[OK] domain_model.puml                        - Class Diagram for Domain Model
-... and 10 more
-```
+See **[PLANTUML_GUIDE.md](./PLANTUML_GUIDE.md)** for installation and usage.
 
 ---
 
 ## License
 
-This project is licensed under the **MIT License** - see below for details.
-
-```
-MIT License
-
-Copyright (c) 2026 Jafte de Oliveira Novaes
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+This project is licensed under the **MIT License** — see [LICENSE](./LICENSE) for details.
 
 ## Author
 
-**Jafte de Oliveira Novaes**
-
-- GitHub: [@jafte](https://github.com)
-- Email: [your.email@example.com]
+**Jafte Carneiro Fagundes da Silva**
 - Role: Web Software Architect & AI Agent Specialist
 
 ## Version History
 
 | Version | Date       | Changes                                          |
 |---------|------------|--------------------------------------------------|
-| 1.0.0   | 2026-05-13 | Initial release with 7 AI agents and full docs   |
+| 1.0.0   | 2026-05-13 | Modular architecture, 28 tests, CI/CD, auto-registration, type hints, pyproject.toml, bug fixes |
 | 0.1.0   | 2026-05-01 | Beta version with basic project structure        |
 
 ## Contributing
@@ -853,18 +502,16 @@ Contributions are welcome! Please follow these guidelines:
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/improvement`)
-3. Make your changes
-4. Add tests if applicable
-5. Commit with clear messages
-6. Push to the branch
-7. Open a Pull Request
+3. Run tests: `python -m pytest tests/`
+4. Commit with clear messages
+5. Push to the branch
+6. Open a Pull Request
 
 ## Acknowledgments
 
-- **AGENTS_WEB_UML.md** - Architecture and AI agent guidelines
-- **Modern Web Development Community** - Best practices and standards
-- **React, TypeScript, Vite Teams** - Foundational technologies
-- **Contributors** - Thank you for your support and feedback
+- **AGENTS_WEB_UML.md** — Architecture and AI agent guidelines
+- **Modern Web Development Community** — Best practices and standards
+- **React, TypeScript, Vite Teams** — Foundational technologies
 
 ---
 
@@ -877,5 +524,3 @@ Contributions are welcome! Please follow these guidelines:
 **Happy building! 🚀**
 
 </div>
-
-Use this structure to create well-architected, documented, and maintainable Web applications with the help of AI agents.
