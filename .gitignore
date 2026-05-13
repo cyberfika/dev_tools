@@ -1,0 +1,444 @@
+# ============================================================================
+# Web Project Generator - .gitignore
+# ============================================================================
+# This .gitignore file covers:
+# - Python development
+# - Node.js / npm development
+# - IDE and editor files
+# - OS-specific files
+# - Environment variables
+# - Build outputs
+# - Credentials and secrets
+
+# ============================================================================
+# PYTHON
+# ============================================================================
+
+# Virtual environments
+venv/
+env/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff
+instance/
+.webassets-cache
+
+# Scrapy stuff
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# ============================================================================
+# NODE.JS / NPM
+# ============================================================================
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Temporary files
+*.tsbuildinfo
+
+# Lock files (optional - uncomment if you want to ignore)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Output of the build process
+dist/
+build/
+
+# ============================================================================
+# IDE AND EDITOR FILES
+# ============================================================================
+
+# VS Code
+.vscode/
+*.code-workspace
+.history/
+.vscode-settings.json
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt][a-z]
+Session.vim
+.exrc
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# Nano
+.nano_history
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# ============================================================================
+# OPERATING SYSTEM FILES
+# ============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.Icon?
+.CFUserTextEncoding
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.cab
+*.msi
+*.msix
+*.msapp
+*.lnk
+
+# Linux
+.directory
+.Trash-*
+.mount_*
+
+# ============================================================================
+# ENVIRONMENT AND CONFIGURATION
+# ============================================================================
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Configuration
+.config/
+config.local.js
+config.local.json
+
+# Credentials and secrets (NEVER commit these!)
+credentials.json
+secrets.json
+.credentials
+private_key.pem
+public_key.pem
+github_token.txt
+api_keys.txt
+
+# ============================================================================
+# BUILD AND DISTRIBUTION
+# ============================================================================
+
+# Build outputs
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Compiled files
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+
+# TypeScript
+*.tsbuildinfo
+.tsc-out/
+
+# Webpack
+webpack-stats.json
+
+# ============================================================================
+# TESTING AND COVERAGE
+# ============================================================================
+
+# Test coverage
+coverage/
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.nyc_output/
+
+# Test outputs
+test-results/
+junit.xml
+test-report.html
+
+# ============================================================================
+# DEPENDENCY LOCK FILES (Optional)
+# ============================================================================
+
+# Uncomment these lines if you want to ignore lock files
+# This is useful for libraries, but typically committing lock files is recommended
+
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+# Pipfile.lock
+
+# ============================================================================
+# GENERATED AND TEMPORARY FILES
+# ============================================================================
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*~
+*.swp
+*.swo
+
+# OS temp files
+.~*
+Thumbs.db
+ehthumbs.db
+
+# Logs and debugging
+*.log
+logs/
+debug/
+
+# Cache
+.cache/
+.eslintcache
+.node_cache/
+
+# PlantUML generated images (keep .puml source, ignore generated)
+# Uncomment if you want to ignore generated diagrams
+# *.svg
+# *.png
+# *.pdf
+
+# ============================================================================
+# GENERATED PROJECT OUTPUTS
+# ============================================================================
+
+# Output from the project generator
+my-awesome-app/
+test_web_project/
+test_project/
+
+# Generated documentation
+docs/generated/*
+!docs/generated/.gitkeep
+
+# ============================================================================
+# MISCELLANEOUS
+# ============================================================================
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Editor backups
+*~
+*.swp
+*.swo
+*#
+
+# OS metadata
+.DS_Store
+Thumbs.db
+.directory
+
+# Python type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# IDE type information
+.pyre/
+
+# Package management
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# ============================================================================
+# KEEP THESE FILES
+# ============================================================================
+# Explicitly allow these important files:
+#
+# !.gitignore              - This file itself
+# !.github/                - GitHub configuration
+# !.env.example            - Template for environment variables
+# !.prettierrc              - Code formatter config
+# !.eslintrc               - Linter config
+# !.editorconfig           - Editor config
+
+!.gitignore
+!.env.example
+!.prettierrc
+!.eslintrc.*
+!.editorconfig
+
+github_webstorm_token.txt
+
+docs/
+docs/**
+/docs/
+/docs/**
+
+# ============================================================================
+# END OF .GITIGNORE
+# ============================================================================
