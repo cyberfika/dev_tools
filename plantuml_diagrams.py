@@ -10,18 +10,54 @@ Provides reusable PlantUML (.puml) diagram templates for:
 - State Machine Diagrams
 - Deployment Diagrams
 - Entity Relationship Diagrams
+
+New diagrams are auto-registered via @register_diagram decorator.
 """
 
 from datetime import date
+from typing import Callable, Dict
 
-TODAY = date.today().isoformat()
+TODAY: str = date.today().isoformat()
+
+# ---------------------------------------------------------------------------
+# Auto-registration system
+# ---------------------------------------------------------------------------
+
+_diagram_registry: Dict[str, dict] = {}
+
+
+def register_diagram(key: str, name: str, description: str, type: str) -> Callable:
+    """Decorator that auto-registers a PlantUML template function."""
+    def decorator(func: Callable) -> Callable:
+        _diagram_registry[key] = {
+            "name": name,
+            "description": description,
+            "type": type,
+            "func": func,
+        }
+        return func
+    return decorator
+
+
+def get_all_plantuml_diagrams() -> Dict[str, dict]:
+    """Returns a dictionary of all registered PlantUML diagram templates."""
+    return {
+        key: {
+            "name": entry["name"],
+            "description": entry["description"],
+            "type": entry["type"],
+            "content": entry["func"](),
+        }
+        for key, entry in _diagram_registry.items()
+    }
 
 
 # ============================================================================
 # USE CASE DIAGRAMS
 # ============================================================================
 
-def puml_usecase_web_app():
+@register_diagram("usecase_web_app", "web_usecase_diagram.puml", "Use Case Diagram for Web Application", "use-case")
+def puml_usecase_web_app() -> str:
     """Use Case Diagram for a typical Web application."""
     return f"""@startuml web_usecase_diagram
 !theme plain
@@ -73,7 +109,8 @@ uc_update_profile .> uc_profile : extends
 """
 
 
-def puml_usecase_auth_flow():
+@register_diagram("usecase_auth", "auth_usecase_diagram.puml", "Use Case Diagram for Authentication", "use-case")
+def puml_usecase_auth_flow() -> str:
     """Use Case Diagram for authentication flow."""
     return f"""@startuml auth_usecase_diagram
 !theme plain
@@ -115,7 +152,8 @@ uc_signout .> uc_token : invalidates
 # CLASS DIAGRAMS
 # ============================================================================
 
-def puml_class_domain_model():
+@register_diagram("class_domain", "domain_model.puml", "Class Diagram for Domain Model", "class")
+def puml_class_domain_model() -> str:
     """Class Diagram for domain model."""
     return f"""@startuml domain_model
 !theme plain
@@ -236,7 +274,8 @@ Order --> User
 """
 
 
-def puml_class_services():
+@register_diagram("class_services", "services_diagram.puml", "Class Diagram for Application Services", "class")
+def puml_class_services() -> str:
     """Class Diagram for application services."""
     return f"""@startuml services_diagram
 !theme plain
@@ -310,7 +349,8 @@ OrderService ..|> IOrderService
 # SEQUENCE DIAGRAMS
 # ============================================================================
 
-def puml_sequence_login_flow():
+@register_diagram("sequence_login", "login_sequence.puml", "Sequence Diagram for Login Flow", "sequence")
+def puml_sequence_login_flow() -> str:
     """Sequence Diagram for login flow."""
     return f"""@startuml login_sequence
 !theme plain
@@ -359,7 +399,8 @@ deactivate LoginPage
 """
 
 
-def puml_sequence_checkout_flow():
+@register_diagram("sequence_checkout", "checkout_sequence.puml", "Sequence Diagram for Checkout Flow", "sequence")
+def puml_sequence_checkout_flow() -> str:
     """Sequence Diagram for checkout flow."""
     return f"""@startuml checkout_sequence
 !theme plain
@@ -421,7 +462,8 @@ deactivate CheckoutPage
 # COMPONENT DIAGRAMS
 # ============================================================================
 
-def puml_component_frontend_architecture():
+@register_diagram("component_frontend", "frontend_components.puml", "Component Diagram for Frontend Architecture", "component")
+def puml_component_frontend_architecture() -> str:
     """Component Diagram for frontend architecture."""
     return f"""@startuml frontend_components
 !theme plain
@@ -512,7 +554,8 @@ App --> Analytics
 """
 
 
-def puml_component_system_architecture():
+@register_diagram("component_system", "system_architecture.puml", "Component Diagram for System Architecture", "component")
+def puml_component_system_architecture() -> str:
     """Component Diagram for system architecture."""
     return f"""@startuml system_components
 !theme plain
@@ -578,7 +621,8 @@ package "External Services" {{
 # STATE MACHINE DIAGRAMS
 # ============================================================================
 
-def puml_state_form_validation():
+@register_diagram("state_form", "form_states.puml", "State Machine for Form Validation", "state")
+def puml_state_form_validation() -> str:
     """State Machine Diagram for form validation."""
     return f"""@startuml form_states
 !theme plain
@@ -610,7 +654,8 @@ Success --> [*]: order confirmed
 """
 
 
-def puml_state_order_lifecycle():
+@register_diagram("state_order", "order_states.puml", "State Machine for Order Lifecycle", "state")
+def puml_state_order_lifecycle() -> str:
     """State Machine Diagram for order lifecycle."""
     return f"""@startuml order_states
 !theme plain
@@ -642,7 +687,8 @@ Confirmed --> Pending: retry\nif payment fails
 """
 
 
-def puml_state_auth_session():
+@register_diagram("state_auth", "auth_states.puml", "State Machine for Authentication Session", "state")
+def puml_state_auth_session() -> str:
     """State Machine Diagram for authentication session."""
     return f"""@startuml auth_states
 !theme plain
@@ -677,7 +723,8 @@ Unauthenticated --> [*]: session ended
 # DEPLOYMENT DIAGRAMS
 # ============================================================================
 
-def puml_deployment_architecture():
+@register_diagram("deployment", "deployment_architecture.puml", "Deployment Diagram for Infrastructure", "deployment")
+def puml_deployment_architecture() -> str:
     """Deployment Diagram for application infrastructure."""
     return f"""@startuml deployment_diagram
 !theme plain
@@ -759,7 +806,8 @@ api_server --> email: send emails
 # ENTITY RELATIONSHIP DIAGRAMS (ERD)
 # ============================================================================
 
-def puml_erd_database_schema():
+@register_diagram("erd", "database_erd.puml", "Entity Relationship Diagram for Database", "erd")
+def puml_erd_database_schema() -> str:
     """Entity Relationship Diagram for database schema."""
     return f"""@startuml database_erd
 !theme plain
@@ -851,96 +899,7 @@ carts ||--o{{ cart_items : "contains"
 """
 
 
-# ============================================================================
-# EXPORT TEMPLATES
-# ============================================================================
-
-def get_all_plantuml_diagrams():
-    """Returns a dictionary of all PlantUML diagram templates."""
-    return {
-        "usecase_web_app": {
-            "name": "web_usecase_diagram.puml",
-            "description": "Use Case Diagram for Web Application",
-            "type": "use-case",
-            "content": puml_usecase_web_app(),
-        },
-        "usecase_auth": {
-            "name": "auth_usecase_diagram.puml",
-            "description": "Use Case Diagram for Authentication",
-            "type": "use-case",
-            "content": puml_usecase_auth_flow(),
-        },
-        "class_domain": {
-            "name": "domain_model.puml",
-            "description": "Class Diagram for Domain Model",
-            "type": "class",
-            "content": puml_class_domain_model(),
-        },
-        "class_services": {
-            "name": "services_diagram.puml",
-            "description": "Class Diagram for Application Services",
-            "type": "class",
-            "content": puml_class_services(),
-        },
-        "sequence_login": {
-            "name": "login_sequence.puml",
-            "description": "Sequence Diagram for Login Flow",
-            "type": "sequence",
-            "content": puml_sequence_login_flow(),
-        },
-        "sequence_checkout": {
-            "name": "checkout_sequence.puml",
-            "description": "Sequence Diagram for Checkout Flow",
-            "type": "sequence",
-            "content": puml_sequence_checkout_flow(),
-        },
-        "component_frontend": {
-            "name": "frontend_components.puml",
-            "description": "Component Diagram for Frontend Architecture",
-            "type": "component",
-            "content": puml_component_frontend_architecture(),
-        },
-        "component_system": {
-            "name": "system_architecture.puml",
-            "description": "Component Diagram for System Architecture",
-            "type": "component",
-            "content": puml_component_system_architecture(),
-        },
-        "state_form": {
-            "name": "form_states.puml",
-            "description": "State Machine for Form Validation",
-            "type": "state",
-            "content": puml_state_form_validation(),
-        },
-        "state_order": {
-            "name": "order_states.puml",
-            "description": "State Machine for Order Lifecycle",
-            "type": "state",
-            "content": puml_state_order_lifecycle(),
-        },
-        "state_auth": {
-            "name": "auth_states.puml",
-            "description": "State Machine for Authentication Session",
-            "type": "state",
-            "content": puml_state_auth_session(),
-        },
-        "deployment": {
-            "name": "deployment_architecture.puml",
-            "description": "Deployment Diagram for Infrastructure",
-            "type": "deployment",
-            "content": puml_deployment_architecture(),
-        },
-        "erd": {
-            "name": "database_erd.puml",
-            "description": "Entity Relationship Diagram for Database",
-            "type": "erd",
-            "content": puml_erd_database_schema(),
-        },
-    }
-
-
 if __name__ == "__main__":
-    # Display all available diagrams
     diagrams = get_all_plantuml_diagrams()
     print(f"PlantUML Diagrams Available: {len(diagrams)}\n")
     for key, diagram in diagrams.items():

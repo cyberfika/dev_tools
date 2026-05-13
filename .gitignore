@@ -37,14 +37,11 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# Python cache
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
-.Python
-
-# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -62,12 +59,8 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
-
-# PyInstaller
 *.manifest
 *.spec
-
-# Unit test / coverage reports
 htmlcov/
 .tox/
 .nox/
@@ -77,81 +70,38 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.cover
-*.py,cover
-.hypothesis/
+*.hypothesis/
 .pytest_cache/
-
-# Translations
 *.mo
 *.pot
-
-# Django stuff
 *.log
 local_settings.py
 db.sqlite3
-db.sqlite3-journal
-
-# Flask stuff
 instance/
 .webassets-cache
-
-# Scrapy stuff
 .scrapy
-
-# Sphinx documentation
 docs/_build/
-
-# PyBuilder
 target/
-
-# Jupyter Notebook
 .ipynb_checkpoints
-
-# IPython
 profile_default/
 ipython_config.py
-
-# pyenv
 .python-version
-
-# pipenv
 Pipfile.lock
-
-# PEP 582
 __pypackages__/
-
-# Celery stuff
 celerybeat-schedule
 celerybeat.pid
-
-# SageMath parsed files
 *.sage.py
-
-# Environments
 .env
 .venv
-env/
-venv/
-ENV/
 env.bak/
 venv.bak/
-
-# Spyder project settings
 .spyderproject
 .spyproject
-
-# Rope project settings
 .ropeproject
-
-# mkdocs documentation
 /site
-
-# mypy
 .mypy_cache/
 .dmypy.json
 dmypy.json
-
-# Pyre type checker
 .pyre/
 
 # ============================================================================
@@ -277,64 +227,29 @@ public_key.pem
 github_token.txt
 api_keys.txt
 
-# ============================================================================
-# BUILD AND DISTRIBUTION
-# ============================================================================
-
-# Build outputs
-build/
+# Build and distribution
 dist/
-*.egg-info/
-.eggs/
-
-# Compiled files
 *.o
 *.a
-*.so
 *.dylib
 *.dll
 *.exe
 *.out
-
-# TypeScript
 *.tsbuildinfo
 .tsc-out/
-
-# Webpack
 webpack-stats.json
 
-# ============================================================================
-# TESTING AND COVERAGE
-# ============================================================================
-
-# Test coverage
+# Testing and coverage
 coverage/
-.coverage
-.coverage.*
-htmlcov/
-.pytest_cache/
 .nyc_output/
-
-# Test outputs
 test-results/
 junit.xml
 test-report.html
 
-# ============================================================================
-# DEPENDENCY LOCK FILES (Optional)
-# ============================================================================
-
-# Uncomment these lines if you want to ignore lock files
-# This is useful for libraries, but typically committing lock files is recommended
-
+# Dependency lock files (optional - uncomment to use)
 # package-lock.json
 # yarn.lock
 # pnpm-lock.yaml
-# Pipfile.lock
-
-# ============================================================================
-# GENERATED AND TEMPORARY FILES
-# ============================================================================
 
 # Temporary files
 *.tmp
@@ -345,67 +260,52 @@ test-report.html
 *.swp
 *.swo
 
-# OS temp files
+# OS files
 .~*
 Thumbs.db
 ehthumbs.db
+.DS_Store
+.directory
+Desktop.ini
+*.cab
+*.msi
+*.msix
+*.msapp
+*.lnk
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.Icon?
+.CFUserTextEncoding
+.mount_*
+.Trash-*
 
 # Logs and debugging
-*.log
 logs/
 debug/
+*.log
 
 # Cache
 .cache/
 .eslintcache
 .node_cache/
 
-# PlantUML generated images (keep .puml source, ignore generated)
-# Uncomment if you want to ignore generated diagrams
+# PlantUML generated images (keep .puml source)
 # *.svg
 # *.png
 # *.pdf
 
-# ============================================================================
-# GENERATED PROJECT OUTPUTS
-# ============================================================================
-
-# Output from the project generator
+# Generated project outputs
 my-awesome-app/
 test_web_project/
 test_project/
-
-# Generated documentation
 docs/generated/*
 !docs/generated/.gitkeep
 
-# ============================================================================
-# MISCELLANEOUS
-# ============================================================================
-
-# Backup files
-*.bak
-*.backup
-*.orig
-
 # Editor backups
-*~
-*.swp
-*.swo
 *#
-
-# OS metadata
-.DS_Store
-Thumbs.db
-.directory
-
-# Python type checking
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# IDE type information
-.pyre/
 
 # Package management
 .yarn/cache

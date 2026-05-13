@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth:*)",
+      "Bash(wc -c github_webstorm_token.txt)"
+    ]
+  }
+}

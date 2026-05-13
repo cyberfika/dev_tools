@@ -6,7 +6,7 @@ Documentation of the Web Project Generator repository structure.
 
 ```
 dev_tools/
-├── README.md                    # Main documentation (3000+ lines)
+├── README.md                    # Main documentation (881 lines)
 ├── LICENSE                      # MIT License
 ├── AUTHOR.md                    # Author information & contributors guide
 ├── BADGES.md                    # Badge documentation and usage
@@ -37,7 +37,7 @@ dev_tools/
 12. Support and contributing
 13. Author and license information
 
-**Size:** ~3000 lines
+**Size:** 881 lines
 **Audience:** Developers, architects, team leads
 **Update Frequency:** As features change
 
